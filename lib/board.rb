@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
   attr_accessor :size, :grid
 
@@ -32,5 +34,32 @@ class Board
 
   def diagonals
     [[grid[0], grid[4], grid[8]], [grid[2], grid[4], grid[6]]]
+  end
+
+  def row_win?
+    rows.each { |row| return true if row.uniq == ['X'] || row.uniq == ['O'] }
+    false
+  end
+  
+  def column_win?
+    columns.each { |col| return true if col.uniq == ['X'] || col.uniq == ['O'] }
+    false
+  end
+  
+  def diagonal_win?
+    diagonals.each { |d| return true if d.uniq == ['X'] || d.uniq == ['O'] }
+    false
+  end
+
+  def winner?
+    row_win? || column_win? || diagonal_win?
+  end
+
+  def tie?
+    available_moves.length.zero? && !winner?
+  end
+
+  def game_over?
+    available_moves.length.zero?
   end
 end
