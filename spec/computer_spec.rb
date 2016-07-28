@@ -22,6 +22,35 @@ describe Computer do
     end
   end
 
+  context '#move' do
+    it 'takes the last move' do
+      @board.set_piece_at(2, "O")
+      @board.set_piece_at(3, "X")
+      @board.set_piece_at(4, "O")
+      @board.set_piece_at(5, "X")
+      @board.set_piece_at(6, "O")
+      @board.set_piece_at(7, "X")
+      @board.set_piece_at(8, "O")
+      @board.set_piece_at(9, "X")
+      expect(@computer.move(@board)).to eq 1
+    end
+
+    it 'performs a block' do
+      @board.set_piece_at(1, "O")
+      @board.set_piece_at(2, "X")
+      @board.set_piece_at(5, "O")
+      expect(@computer.move(@board)).to eq 9
+    end
+    
+    it 'takes the win over a block' do
+      @board.set_piece_at(1, "X")
+      @board.set_piece_at(2, "O")
+      @board.set_piece_at(4, "X")
+      @board.set_piece_at(5, "O")
+      expect(@computer.move(@board)).to eq 7
+    end
+  end
+
   context '#score' do
     it 'returns 10 if current player wins' do
       @board.grid = %w(X O X
