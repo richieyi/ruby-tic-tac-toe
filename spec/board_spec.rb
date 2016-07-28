@@ -156,4 +156,24 @@ describe Board do
       expect(board.game_over?).to be_falsey
     end
   end
+
+
+  context '#winner' do
+    it 'returns the winner of TTT' do
+      board.grid = %w(O O O
+                      X O X
+                      O X X)
+      expect(board.winner).to eq 'O'
+
+      board.grid = %w(O X X
+                      X O X
+                      O O X)
+      expect(board.winner).to eq 'X'
+
+      board.grid = %w(O X O
+                      X O X
+                      O O X)
+      expect(board.winner).to eq 'O'
+    end
+  end
 end

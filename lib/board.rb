@@ -62,4 +62,10 @@ class Board
   def game_over?
     available_moves.length.zero?
   end
+
+  def winner
+    rows.each { |row| return row.uniq.first if row.uniq.length == 1 }
+    columns.each { |col| return col.uniq.first if col.uniq.length == 1 }
+    diagonals.each { |diag| return diag.uniq.first if diag.uniq.length == 1 }
+  end
 end
