@@ -60,4 +60,100 @@ describe Board do
       expect(board.diagonals).to eq [%w(1 5 9), %w(3 5 7)]
     end
   end
+
+  context '#row_win?' do
+    it 'returns true for a row win' do
+      board.grid = %w(O X O
+                      X X X
+                      X O O)
+      expect(board.row_win?).to be_truthy
+    end
+    
+    it 'returns false if not a row win' do
+      board.grid = %w(O X O
+                      O X X
+                      X O O)
+      expect(board.row_win?).to be_falsey
+    end
+  end
+  
+  context '#column_win?' do
+    it 'returns true for a column win' do
+      board.grid = %w(O X O
+                      O X X
+                      X X O)
+      expect(board.column_win?).to be_truthy
+    end
+    
+    it 'returns false if not a column win' do
+      board.grid = %w(O X O
+                      O X X
+                      X O O)
+      expect(board.column_win?).to be_falsey
+    end
+  end
+  
+  context '#diagonal_win?' do
+    it 'returns true for a diagonal win' do
+      board.grid = %w(O O X
+                      O X X
+                      X O O)
+      expect(board.diagonal_win?).to be_truthy
+    end
+    
+    it 'returns false if not a diagonal win' do
+      board.grid = %w(O X O
+                      O X X
+                      X O O)
+      expect(board.diagonal_win?).to be_falsey
+    end
+  end
+
+  context '#winner?' do
+    it 'returns true if there is a winner' do
+      board.grid = %w(O X O
+                      O O X
+                      X X O)
+      expect(board.winner?).to be_truthy
+    end
+
+    it 'returns false if there is no winner' do
+      board.grid = %w(O X O
+                      O X X
+                      X O O)
+      expect(board.winner?).to be_falsey
+    end
+  end
+  
+  context '#tie?' do
+    it 'returns true if there is a tie' do
+      board.grid = %w(X X O
+                      O O X
+                      X X O)
+      expect(board.tie?).to be_truthy
+    end
+
+    it 'returns false if there is no tie' do
+      board.grid = %w(O X O
+                      X X X
+                      X O O)
+      expect(board.tie?).to be_falsey
+    end
+  end
+  
+  context '#game_over?' do
+    it 'returns true if the game is over' do
+      board.grid = %w(X X O
+                      O O X
+                      X X O)
+      expect(board.game_over?).to be_truthy
+    end
+
+    it 'returns false if game is not over' do
+      board.grid = %w(X X O
+                      O O X
+                      X 8 O)
+      expect(board.game_over?).to be_falsey
+    end
+  end
 end
