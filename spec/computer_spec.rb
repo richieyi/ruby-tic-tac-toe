@@ -23,7 +23,7 @@ describe Computer do
   end
 
   context '#move' do
-    it 'takes the last move' do
+    xit 'takes the last move' do
       @board.set_piece_at(2, "O")
       @board.set_piece_at(3, "X")
       @board.set_piece_at(4, "O")
@@ -46,11 +46,18 @@ describe Computer do
     
     it 'takes the win over a block' do
       @board.set_piece_at(1, "X")
-      @board.set_piece_at(5, "O")
-      @board.set_piece_at(3, "X")
       @board.set_piece_at(2, "O")
+      @board.set_piece_at(3, "O")
+      @board.set_piece_at(4, "O")
       @board.set_piece_at(7, "X")
-      expect(@computer.move(@board)).to eq 9
+      @board.set_piece_at(8, "O")
+      @board.set_piece_at(9, "O")
+      expect(@computer.move(@board)).to eq 5
+    end
+
+    xit 'takes a move' do
+      @board.set_piece_at(1, "X")
+      expect(@computer.move(@board)).to eq 5
     end
   end
 

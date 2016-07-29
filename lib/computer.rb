@@ -4,7 +4,7 @@ class Computer
   
   def initialize(piece, board)
     @piece = piece
-    @enemy = piece == "O" ? "X" : "O"
+    @enemy = piece == "X" ? "O" : "X"
     @board = board
   end
 
@@ -14,18 +14,30 @@ class Computer
   end
 
   def minimax(board, current_player, depth)
-    return score(board, depth) if board.game_over?
     depth += 1
 
     scores = []
     moves = []
     pieces = []
+    
+    return score(board, depth) if board.game_over?
 
     board.available_moves.each do |move|
-      board.set_piece_at(move.to_i, current_player) 
-      next_player = current_player == "O" ? "X" : "O"
 
+      print "\n"
+      print "HELLO I AM MOVE: #{move} using #{current_player}"
+      print "\n"
+      
+      board.set_piece_at(move.to_i, current_player) 
+     
+      print "HELLO I AM GRID: #{board.grid}"
+      print "\n"
+
+      next_player = current_player == @piece ? @enemy : @piece 
+      
       scores << minimax(board, next_player, depth)
+     
+      print "\n"
       moves << move
       pieces << next_player
       print "\n"
@@ -35,6 +47,9 @@ class Computer
       print "\n"
       print pieces 
       print "\n"
+      print "-" * 40
+      print "\n"
+      
       board.reset_piece_at(move.to_i)
     end
 
@@ -50,10 +65,13 @@ class Computer
   end
 
   def score(board, depth)
+    opp = piece == "X" ? "O" : "X"
     if board.winner == piece
-      return (10 - depth)
-    elsif board.winner == enemy
-      return (depth - 10)
+      print 'calc pos'
+      (10 - depth)
+    elsif board.winner == opp
+      print 'calc neg'
+      (depth - 10)
     else
       0
     end

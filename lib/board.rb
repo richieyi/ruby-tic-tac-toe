@@ -60,7 +60,11 @@ class Board
   end
 
   def game_over?
-    available_moves.length.zero?
+    winner? || tie?
+  end
+
+  def piece_winner?(piece)
+    winner == piece
   end
 
   def winner
