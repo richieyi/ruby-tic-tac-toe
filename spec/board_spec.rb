@@ -157,20 +157,6 @@ describe Board do
     end
   end
 
-  context '#winner?' do
-    it 'checks to see if piece is the winner' do
-      board.grid = %w(X X X
-                      O O X
-                      X O O)
-      expect(board.piece_winner?("X")).to be_truthy
-      
-      board.grid = %w(X X X
-                      O O X
-                      X O O)
-      expect(board.piece_winner?("O")).to be_falsey
-    end
-  end
-
   context '#winner' do
     it 'returns the winner of TTT' do
       board.grid = %w(O X O

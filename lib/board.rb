@@ -38,17 +38,17 @@ class Board
 
   def row_win?
     rows.each { |row| return true if row.uniq == ['X'] || row.uniq == ['O'] }
-    false
+    return false
   end
   
   def column_win?
     columns.each { |col| return true if col.uniq == ['X'] || col.uniq == ['O'] }
-    false
+    return false
   end
   
   def diagonal_win?
     diagonals.each { |d| return true if d.uniq == ['X'] || d.uniq == ['O'] }
-    false
+    return false
   end
 
   def winner?
@@ -60,11 +60,7 @@ class Board
   end
 
   def game_over?
-    winner? || tie?
-  end
-
-  def piece_winner?(piece)
-    winner == piece
+    winner? || available_moves.length.zero?
   end
 
   def winner
