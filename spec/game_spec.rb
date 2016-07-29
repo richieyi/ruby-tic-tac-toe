@@ -8,7 +8,7 @@ require 'pry'
 describe Game do
   let(:board) { Board.new }
   let(:game) do
-    Game.new(board, Human.new("O", board), Computer.new("X", board), UI.new)
+    Game.new(board, Human.new("X", board), Computer.new("O", board), UI.new)
   end
 
   context '#initialize' do

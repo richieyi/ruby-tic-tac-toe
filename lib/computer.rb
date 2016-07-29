@@ -8,38 +8,52 @@ class Computer
     @board = board
   end
 
-  def score(board)
-    if board.winner == piece
-      10
-    elsif board.winner == enemy
-      -10
-    else
-      0
-    end
-  end
-
   def move(board)
-    minimax(board, @piece)
+    minimax(board, @piece, 0)
     @b_move.to_i
   end
 
-  def minimax(board, current_player)
-    return score(board) if board.game_over?
+  def minimax(board, current_player, depth)
+    depth += 1
 
     scores = []
     moves = []
+    pieces = []
+    
+    return score(board, depth) if board.game_over?
 
     board.available_moves.each do |move|
+
+      print "\n"
+      print "HELLO I AM MOVE: #{move} using #{current_player}"
+      print "\n"
+      
       board.set_piece_at(move.to_i, current_player) 
-      next_player = current_player == "X" ? "O" : "X"
+     
+      print "HELLO I AM GRID: #{board.grid}"
+      print "\n"
 
-      scores << minimax(board, next_player)
+      next_player = current_player == @piece ? @enemy : @piece 
+      
+      scores << minimax(board, next_player, depth)
+     
+      print "\n"
       moves << move
-
+      pieces << next_player
+      print "\n"
+      print scores
+      print "\n"
+      print moves
+      print "\n"
+      print pieces 
+      print "\n"
+      print "-" * 40
+      print "\n"
+      
       board.reset_piece_at(move.to_i)
     end
 
-    if current_player == piece
+    if current_player == @piece
       max_score_idx = scores.each_with_index.max[1]
       @b_move = moves[max_score_idx]
       return scores[max_score_idx]
@@ -47,6 +61,19 @@ class Computer
       min_score_idx = scores.each_with_index.min[1]
       @b_move = moves[min_score_idx]
       return scores[min_score_idx]
+    end
+  end
+
+  def score(board, depth)
+    opp = piece == "X" ? "O" : "X"
+    if board.winner == piece
+      print 'calc pos'
+      (10 - depth)
+    elsif board.winner == opp
+      print 'calc neg'
+      (depth - 10)
+    else
+      0
     end
   end
 end

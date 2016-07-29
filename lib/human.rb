@@ -3,7 +3,7 @@ class Human
   
   def initialize(piece, board)
     @piece = piece
-    @enemy = piece == "O" ? "X" : "O"
+    @enemy = piece == "X" ? "O" : "X"
     @board = board
   end
 end
