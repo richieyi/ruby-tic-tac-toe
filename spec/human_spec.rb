@@ -1,8 +1,6 @@
 require 'human.rb'
-require 'board.rb'
 
 describe Human do
-  let(:board) { Board.new }
   before(:each) { @human = Human.new("X") }
 
   context '#initialize' do
