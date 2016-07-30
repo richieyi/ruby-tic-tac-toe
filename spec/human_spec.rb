@@ -3,9 +3,7 @@ require 'board.rb'
 
 describe Human do
   let(:board) { Board.new }
-  before(:each) do
-    @human = Human.new("X")
-  end
+  before(:each) { @human = Human.new("X") }
 
   context '#initialize' do
     it 'is initialized with a piece' do

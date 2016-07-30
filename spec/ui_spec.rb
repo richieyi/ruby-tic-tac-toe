@@ -62,14 +62,6 @@ describe UI do
     end
   end
 
-  context '#receive_piece_preference' do
-    it 'prompts user for piece preference and receives input' do
-      expect(ui).to receive(:print_message).with('Enter a piece preference (X or O): ')
-      allow(ui).to receive(:receive_input).and_return('X')
-      expect(ui.receive_piece_preference).to eq 'X'
-    end
-  end
-
   context '#receive_piece_location' do
     it 'prompts user for piece location and receives input' do
       expect(ui).to receive(:print_message).with('Enter a piece location (1-9): ')
