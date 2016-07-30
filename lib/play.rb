@@ -4,5 +4,5 @@ require_relative 'human'
 require_relative 'computer'
 require_relative 'ui'
 
-game = Game.new(Board.new, Human.new("O"), Computer.new("X"), UI.new)
+game = Game.new(Board.new, Human.new("X"), Computer.new("O"), UI.new)
 game.play

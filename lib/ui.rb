@@ -33,11 +33,6 @@ class UI
     print_message('Enter a turn preference (1 or 2): ')
     receive_input
   end
- 
-  def receive_piece_preference
-    print_message('Enter a piece preference (X or O): ')
-    receive_input
-  end
 
   def receive_piece_location
     print_message('Enter a piece location (1-9): ')
