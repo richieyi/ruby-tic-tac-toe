@@ -2,9 +2,9 @@ require 'human.rb'
 require 'board.rb'
 
 describe Human do
+  let(:board) { Board.new }
   before(:each) do
-    @board = Board.new
-    @human = Human.new("X", @board)
+    @human = Human.new("X")
   end
 
   context '#initialize' do
@@ -14,10 +14,6 @@ describe Human do
     
     it 'has an enemy' do
       expect(@human.enemy).to eq "O"
-    end
-
-    it 'has a board' do
-      expect(@human.board).to be_a Board
     end
   end
 end

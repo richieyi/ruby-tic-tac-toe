@@ -6,14 +6,12 @@ require 'ui.rb'
 require 'pry'
 
 describe Game do
-  let(:board) { Board.new }
   let(:game) do
-    Game.new(board, Human.new("X", board), Computer.new("O", board), UI.new)
+    Game.new(Board.new, Human.new("X"), Computer.new("O"), UI.new)
   end
 
   context '#initialize' do
     it 'is initialized with a board, human player, computer player, and ui' do
-      expect(game.board).to be_a Board
     end
   end
 end

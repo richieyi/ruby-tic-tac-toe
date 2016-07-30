@@ -1,11 +1,10 @@
 class Computer
-  attr_accessor :piece, :enemy, :board
+  attr_accessor :piece, :enemy
   attr_reader :b_move
   
-  def initialize(piece, board)
+  def initialize(piece)
     @piece = piece
-    @enemy = piece == "X" ? "O" : "X"
-    @board = board
+    @enemy = piece == "O" ? "X" : "O"
   end
 
   def move(board)
@@ -14,42 +13,30 @@ class Computer
   end
 
   def minimax(board, current_player, depth)
-    depth += 1
-
     scores = []
     moves = []
-    pieces = []
     
     return score(board, depth) if board.game_over?
 
     board.available_moves.each do |move|
-
-      print "\n"
-      print "HELLO I AM MOVE: #{move} using #{current_player}"
-      print "\n"
-      
       board.set_piece_at(move.to_i, current_player) 
-     
-      print "HELLO I AM GRID: #{board.grid}"
-      print "\n"
 
-      next_player = current_player == @piece ? @enemy : @piece 
-      
-      scores << minimax(board, next_player, depth)
-     
       print "\n"
+      puts "MOVE: #{move} using #{current_player}"
+      puts "GRID: #{board.grid}"
+
+      next_player = current_player == @piece ? @enemy : @piece
+      scores << minimax(board, next_player, depth + 1)
       moves << move
-      pieces << next_player
+
       print "\n"
       print scores
       print "\n"
       print moves
       print "\n"
-      print pieces 
-      print "\n"
       print "-" * 40
       print "\n"
-      
+
       board.reset_piece_at(move.to_i)
     end
 
@@ -65,15 +52,14 @@ class Computer
   end
 
   def score(board, depth)
-    opp = piece == "X" ? "O" : "X"
-    if board.winner == piece
-      print 'calc pos'
-      (10 - depth)
-    elsif board.winner == opp
-      print 'calc neg'
-      (depth - 10)
+    if board.winner?
+      if board.winner == @piece
+        return (10 - depth)
+      else
+        return (depth - 10)
+      end
     else
-      0
+      return 0
     end
   end
 end

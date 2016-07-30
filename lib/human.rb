@@ -1,9 +1,8 @@
 class Human
-  attr_accessor :piece, :enemy, :board
+  attr_accessor :piece, :enemy
   
-  def initialize(piece, board)
+  def initialize(piece)
     @piece = piece
     @enemy = piece == "X" ? "O" : "X"
-    @board = board
   end
 end
