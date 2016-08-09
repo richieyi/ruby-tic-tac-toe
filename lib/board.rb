@@ -31,7 +31,12 @@ class Board
   end
 
   def diagonals
-    [[grid[0], grid[4], grid[8]], [grid[2], grid[4], grid[6]]]
+    range = Math.sqrt(size) - 1
+    diagonal_1 = (0..range).collect { |i| rows[i][i] }
+    diagonal_2 = (0..range).collect { |i| rows.reverse[i][i] }
+    diagonal_2 = diagonal_2.reverse
+
+    [diagonal_1, diagonal_2]
   end
 
   def row_win?
