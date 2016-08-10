@@ -11,7 +11,7 @@ class Computer
 
   def move(board)
     minimax(board, @piece, STARTING_DEPTH)
-    @best_move.to_i
+    board.set_piece_at(@best_move.to_i, @piece)
   end
 
   def score(board, depth)

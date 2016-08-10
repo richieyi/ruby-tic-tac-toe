@@ -17,12 +17,12 @@ class Game
   def play
     set_turn_order
 
-    until @board.game_over?
+    until @board.game_over? || @board.winner?
       if @human_turn
         @ui.display_board(@board)
-        get_human_move
+        receive_human_move
       else
-        get_computer_move
+        receive_computer_move
       end
       swap_current_player
     end
@@ -42,19 +42,18 @@ class Game
     end
   end
 
-  def get_human_move
+  def receive_human_move
     move = @ui.receive_piece_location
     if @board.available_moves.include?(move)
-      @board.set_piece_at(move.to_i, @human.piece)
+      @human.move(@board, move.to_i)
     else
-      get_human_move
+      receive_human_move
     end
   end
 
-  def get_computer_move
+  def receive_computer_move
     @ui.print_message("Computer is thinking...")
-    move = computer.move(@board)
-    @board.set_piece_at(move.to_i, computer.piece)
+    @computer.move(@board)
   end
 
   def swap_current_player
