@@ -44,20 +44,41 @@ describe Board do
   end
 
   context '#rows' do
-    it 'returns the rows from the board' do
+    it 'returns the rows from a 3x3 board' do
       expect(board.rows).to eq [%w(1 2 3), %w(4 5 6), %w(7 8 9)]
+    end
+    
+    it 'returns the rows from a 4x4 board' do
+      board = Board.new(4)
+      expect(board.rows).to eq [%w(1 2 3 4),
+                                %w(5 6 7 8),
+                                %w(9 10 11 12),
+                                %w(13 14 15 16)]
     end
   end
 
   context '#columns' do
-    it 'returns the columns from the board' do
+    it 'returns the columns from a 3x3 board' do
       expect(board.columns).to eq [%w(1 4 7), %w(2 5 8), %w(3 6 9)]
+    end
+    
+    it 'returns the columns from a 4x4 board' do
+      board = Board.new(4)
+      expect(board.columns).to eq [%w(1 5 9 13),
+                                   %w(2 6 10 14),
+                                   %w(3 7 11 15),
+                                   %w(4 8 12 16)]
     end
   end
 
   context '#diagonals' do
-    it 'returns the diagonals from the board' do
+    it 'returns the diagonals from a 3x3 board' do
       expect(board.diagonals).to eq [%w(1 5 9), %w(3 5 7)]
+    end
+
+    it 'returns the diagonals from a 4x4 board' do
+      board = Board.new(4)
+      expect(board.diagonals).to eq [%w(1 6 11 16), %w(4 7 10 13)]
     end
   end
 

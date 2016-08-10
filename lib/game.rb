@@ -15,49 +15,52 @@ class Game
   end
   
   def play
-    turn_pref = ''
-    until turn_pref == '1' || turn_pref == '2'
-      turn_pref = @ui.receive_turn_preference
-    end
-    set_turn_order(turn_pref)
+    set_turn_order
 
-    until @board.game_over? || @board.tie?
+    until @board.game_over? || @board.winner?
       if @human_turn
         @ui.display_board(@board)
-        location = ''
-        until @board.available_moves.include?(location)
-          location = @ui.receive_piece_location
-        end
-        piece = human.piece
+        receive_human_move
       else
-        @ui.print_message("Computer is thinking...")
-        location = computer.move(@board)
-        piece = computer.piece
+        receive_computer_move
       end
-
-      @board.set_piece_at(location.to_i, piece)
-      swap_player_turn
+      swap_current_player
     end
 
     @ui.display_board(board)
     evaluate_game
   end
 
-  private
-
-  def set_turn_order(turn_pref)
-    @human_turn = true if turn_pref == '1'
+  def set_turn_order
+    turn_pref = @ui.receive_turn_preference
+    if turn_pref == '1'
+      @human_turn = true
+    elsif turn_pref == '2'
+      @human_turn = false
+    else
+      set_turn_order
+    end
   end
 
-  def swap_player_turn
+  def receive_human_move
+    move = @ui.receive_piece_location
+    if @board.available_moves.include?(move)
+      @human.move(@board, move.to_i)
+    else
+      receive_human_move
+    end
+  end
+
+  def receive_computer_move
+    @ui.print_message("Computer is thinking...")
+    @computer.move(@board)
+  end
+
+  def swap_current_player
     @human_turn = !@human_turn 
   end
 
   def evaluate_game
-    if @board.tie?
-      @ui.print_tie
-    else
-      @ui.print_winner(board)
-    end
+    @board.tie? ? @ui.print_tie : @ui.print_winner(board)
   end
 end

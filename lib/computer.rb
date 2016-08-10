@@ -1,6 +1,8 @@
 class Computer
   attr_accessor :piece, :enemy
   attr_reader :best_move
+
+  STARTING_DEPTH = 0
   
   def initialize(piece)
     @piece = piece
@@ -8,9 +10,25 @@ class Computer
   end
 
   def move(board)
-    minimax(board, @piece, 0)
-    @best_move.to_i
+    minimax(board, @piece, STARTING_DEPTH)
+    board.set_piece_at(@best_move.to_i, @piece)
   end
+
+  def score(board, depth)
+    best_score = board.grid.size + 1
+
+    if board.winner?
+      if board.winner == @piece
+        return (best_score - depth)
+      else
+        return (depth - best_score)
+      end
+    else
+      return 0
+    end
+  end
+
+  private
 
   def minimax(board, current_player, depth)
     scores = []
@@ -36,18 +54,6 @@ class Computer
       min_score_idx = scores.each_with_index.min[1]
       @best_move = moves[min_score_idx]
       return scores[min_score_idx]
-    end
-  end
-
-  def score(board, depth)
-    if board.winner?
-      if board.winner == @piece
-        return (10 - depth)
-      else
-        return (depth - 10)
-      end
-    else
-      return 0
     end
   end
 end
