@@ -1,7 +1,7 @@
-# Tic Tac Toe in Ruby
+# Ruby Tic-Tac-Toe
 
-# Introduction
-An unbeatable Tic Tac Toe AI built in Ruby.
+## Introduction
+An unbeatable tic-tac-toe AI built in Ruby.
 
 ## Instructions
 Load the game with `ruby lib/play.rb`

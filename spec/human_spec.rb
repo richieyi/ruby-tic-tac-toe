@@ -18,7 +18,7 @@ describe Human do
   context '#move' do
     it 'sets move based on given location' do
       @human.move(game.board, '1')
-      expect(game.board.get_piece_at(1)).to eq 'X' 
+      expect(game.board.get_piece_at(1)).to eq 'X'
     end
   end
 end

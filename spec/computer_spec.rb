@@ -49,7 +49,7 @@ describe Computer do
 
       expect(board.get_piece_at(7)).to eq 'O'
     end
-    
+
     it 'takes the win over a block' do
       board.set_piece_at(4, 'O')
       board.set_piece_at(1, 'X')

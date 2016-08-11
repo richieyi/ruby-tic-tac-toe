@@ -34,24 +34,23 @@ class Board
     range = Math.sqrt(size) - 1
     diagonal_1 = (0..range).collect { |i| rows[i][i] }
     diagonal_2 = (0..range).collect { |i| rows.reverse[i][i] }
-    diagonal_2 = diagonal_2.reverse
 
-    [diagonal_1, diagonal_2]
+    [diagonal_1, diagonal_2.reverse]
   end
 
   def row_win?
     rows.each { |row| return true if row.uniq == ['X'] || row.uniq == ['O'] }
-    return false
+    false
   end
-  
+
   def column_win?
     columns.each { |col| return true if col.uniq == ['X'] || col.uniq == ['O'] }
-    return false
+    false
   end
-  
+
   def diagonal_win?
     diagonals.each { |d| return true if d.uniq == ['X'] || d.uniq == ['O'] }
-    return false
+    false
   end
 
   def winner?
