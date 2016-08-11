@@ -13,7 +13,7 @@ class Game
     @ui = ui
     @human_turn = false
   end
-  
+
   def play
     set_turn_order
 
@@ -52,12 +52,12 @@ class Game
   end
 
   def receive_computer_move
-    @ui.print_message("Computer is thinking...")
+    @ui.print_message('Computer is thinking...')
     @computer.move(@board)
   end
 
   def swap_current_player
-    @human_turn = !@human_turn 
+    @human_turn = !@human_turn
   end
 
   def evaluate_game

@@ -3,10 +3,10 @@ class Computer
   attr_reader :best_move
 
   STARTING_DEPTH = 0
-  
+
   def initialize(piece)
     @piece = piece
-    @enemy = piece == "O" ? "X" : "O"
+    @enemy = piece == 'O' ? 'X' : 'O'
   end
 
   def move(board)
@@ -33,11 +33,11 @@ class Computer
   def minimax(board, current_player, depth)
     scores = []
     moves = []
-    
+
     return score(board, depth) if board.game_over?
 
     board.available_moves.each do |move|
-      board.set_piece_at(move.to_i, current_player) 
+      board.set_piece_at(move.to_i, current_player)
 
       next_player = current_player == @piece ? @enemy : @piece
       scores << minimax(board, next_player, depth + 1)

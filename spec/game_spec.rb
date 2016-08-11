@@ -30,7 +30,7 @@ describe Game do
       game = Game.new(@board, Human.new('X'), Computer.new('O'), @ui)
       game.play
     end
-    
+
     it 'breaks game loop and shows a tie' do
       allow(@ui).to receive(:receive_turn_preference).and_return('1')
       allow(@board).to receive(:game_over?).and_return(true)
@@ -50,7 +50,7 @@ describe Game do
 
       expect(game.human_turn).to be_truthy
     end
-    
+
     it 'sets human as second if requested' do
       allow(game.ui).to receive(:receive_turn_preference).and_return('2')
       game.set_turn_order
@@ -80,7 +80,7 @@ describe Game do
   context '#swap_current_player' do
     it 'swaps the current players turn' do
       expect(game.human_turn).to be_falsey
-      
+
       game.swap_current_player
       expect(game.human_turn).to be_truthy
     end

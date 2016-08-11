@@ -26,7 +26,7 @@ class UI
   end
 
   def print_tie
-    print_message("Sorry tie game!")
+    print_message('Sorry tie game!')
   end
 
   def receive_turn_preference
@@ -37,5 +37,5 @@ class UI
   def receive_piece_location
     print_message('Enter a piece location (1-9): ')
     receive_input
- end
+  end
 end
