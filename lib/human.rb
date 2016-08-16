@@ -1,11 +1,6 @@
-class Human
-  attr_accessor :piece, :enemy
+require_relative 'player'
 
-  def initialize(piece)
-    @piece = piece
-    @enemy = piece == 'X' ? 'O' : 'X'
-  end
-
+class Human < Player
   def move(board, location)
     board.set_piece_at(location.to_i, @piece)
   end
