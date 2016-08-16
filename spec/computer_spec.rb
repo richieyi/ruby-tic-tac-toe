@@ -1,9 +1,11 @@
 require 'computer.rb'
+require 'player.rb'
 require 'board.rb'
 
 describe Computer do
   let(:board) { Board.new }
-  before(:each) { @computer = Computer.new('O') }
+  let(:o_marker) { Player::O_MARKER }
+  before(:each) { @computer = Computer.new(o_marker) }
 
   context '#initialize' do
     it 'is initialized with a piece' do
@@ -58,36 +60,6 @@ describe Computer do
       @computer.move(board)
 
       expect(board.get_piece_at(6)).to eq 'O'
-    end
-  end
-
-  context '#score' do
-    it 'returns 10 if current player wins' do
-      board.grid = %w(X O O
-                      O X O
-                      X X O)
-      expect(@computer.score(board, 0)).to eq(10)
-    end
-
-    it 'returns 0 if tie' do
-      board.grid = %w(X O X
-                      O X O
-                      O X O)
-      expect(@computer.score(board, 0)).to eq(0)
-    end
-
-    it 'returns 0 if nothing happens' do
-      board.grid = %w(X O 3
-                      X 5 6
-                      7 8 9)
-      expect(@computer.score(board, 0)).to eq(0)
-    end
-
-    it 'returns -10 if current player loses' do
-      board.grid = %w(X O X
-                      O X O
-                      O O X)
-      expect(@computer.score(board, 0)).to eq(-10)
     end
   end
 end

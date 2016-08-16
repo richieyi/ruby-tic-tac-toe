@@ -1,18 +1,16 @@
-class Computer
-  attr_accessor :piece, :enemy
+require_relative 'player'
+
+class Computer < Player
   attr_reader :best_move
 
   STARTING_DEPTH = 0
-
-  def initialize(piece)
-    @piece = piece
-    @enemy = piece == 'O' ? 'X' : 'O'
-  end
 
   def move(board)
     minimax(board, @piece, STARTING_DEPTH)
     board.set_piece_at(@best_move.to_i, @piece)
   end
+
+  private
 
   def score(board, depth)
     best_score = board.grid.size + 1
@@ -27,8 +25,6 @@ class Computer
       return 0
     end
   end
-
-  private
 
   def minimax(board, current_player, depth)
     scores = []
